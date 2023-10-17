@@ -18,11 +18,11 @@ const IndexPage = ({ data }) => (
             <Link to={edge.node.slug}>{edge.node.title}</Link>
             <div>
               <GatsbyImage
-                image={edge.node.heroImage.gastbyImageData}
+                image={edge.node.heroImage.gatsbyImageData}
               />
             </div>
             <div>
-              {edge.node.body.childrenMarkdownRemark.excerpt}
+              {edge.node.description.childMarkdownRemark.excerpt}
             </div>
           </ListItem>
         ))
@@ -49,7 +49,11 @@ export const query = graphql`
           }
         }
         heroImage {
-          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 300)
+          gatsbyImageData(
+            layout: CONSTRAINED
+            placeholder: BLURRED
+            width: 300
+          )
         }
       }
     }
