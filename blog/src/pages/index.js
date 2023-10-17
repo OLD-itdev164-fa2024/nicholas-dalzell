@@ -4,29 +4,30 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { List, ListItem } from '../components/List'
 import * as styles from "../components/index.module.css"
 
 
 const IndexPage = ({ data }) => (
   <Layout>
     <Seo title="Home" />
-    <ul className={styles.list}>
+    <List width={[1, 2/3, 7/8]} p={2}>
       {
         data.allContentfulBlogPost.edges.map(edge => (
-          <li key={edge.node.id}>
+          <ListItem p={3} key={edge.node.id}>
             <Link to={edge.node.slug}>{edge.node.title}</Link>
             <div>
               <GatsbyImage
-                image={edge.node.heroImage.gatsbyImageData}
+                image={edge.node.heroImage.gastbyImageData}
               />
             </div>
             <div>
-              {edge.node.description.childMarkdownRemark.excerpt}
+              {edge.node.body.childrenMarkdownRemark.excerpt}
             </div>
-          </li>
+          </ListItem>
         ))
       }
-    </ul>
+    </List>
   </Layout>
 )
 
