@@ -1,13 +1,16 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout'
 import { H1 } from '../components/Heading'
 
 const BlogPost = ({ data }) => {
-    const { title, category, publishDate, body } = data.contentfulBlogPost;
+    const { title, category, publishDate, body, heroImage } = data.contentfulBlogPost;
 
     return (
         <Layout>
+            <GatsbyImage 
+              image={heroImage.gatsbyImageData} />
             <H1>{title}</H1>
             <publishDate>Date published: {publishDate}</publishDate>
             <p></p>
@@ -31,6 +34,13 @@ query blogPostQuery($slug: String!) {
       childMarkdownRemark {
         html
       }
+    }
+    heroImage {
+      gatsbyImageData(
+        layout: CONSTRAINED
+        placeholder: BLURRED
+        width: 960
+      )
     }
   }
 }
